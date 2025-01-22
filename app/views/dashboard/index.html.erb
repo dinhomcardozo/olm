@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OLM Pipeline</title>
+</head>
+<body>
+
+<%= render 'shared/sidebar' %> <!-- Renderiza o menu -->
+
+    <!-- Main Content -->
+    <main>
+      <header class="header">
+        <div class="logo">ellipsis</div>
+        <div class="welcome">
+          Bem-vindo ao OLM, 
+          <span>
+            <% if current_user %>
+              <%= h(current_user.username) %>
+            <% else %>
+              Visitante
+            <% end %>
+          </span>!
+        </div>
+        <div class="actions"> 
+          <button class="new_opportunity" id="new-opportunity-button" 
+                  data-lightbox-url="<%= new_opportunity_path %>">Criar Novo [+]</button>
+        </div>
+      </header>
+
+      <section class="filters">
+        <%= render 'filters' %>
+      </section>
+
+      <!-- partial que renderiza os stages dentro do pipeline from \dashboard\_stage.html.erb -->
+      <section class="pipeline">
+        <% @stages.each do |stage| %>
+          <%= render partial: "stage", locals: { stage_name: stage[:name], opportunities: stage[:opportunities] } %>
+        <% end %>
+      </section>
+    </main>
+  </div>
+
+  <!-- Container do Lightbox (porque será exibido na 'mesma página') -->
+  <div id="opportunity-lightbox" style="display: none;">
+    <%= render 'opportunities/opportunity_lightbox', opportunity: @opportunity %>
+  </div>
+
+  <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+</body>
+</html>

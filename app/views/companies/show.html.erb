@@ -1,0 +1,13 @@
+<h1>Detalhes da Empresa: <%= @company.company_name %></h1>
+
+<p><strong>CNPJ:</strong> <%= @company.company_cnpj %></p>
+<p><strong>E-mail:</strong> <%= @company.email %></p>
+<p><strong>Telefone:</strong> <%= @company.phone %></p>
+<p><strong>Endereço:</strong> <%= @company.address %>, <%= @company.city %>, <%= @company.state %> - <%= @company.zipcode %></p>
+<p><strong>Grupo:</strong> <%= @company.group.try(:name) %></p>
+<p><strong>Segmento:</strong> <%= @company.segment.try(:name) %></p>
+<p><strong>Subsegmento:</strong> <%= @company.sub_segment.try(:name) %></p>
+<p><strong>Contatos Relacionados:</strong> <%= @company.contacts.map(&:full_name).join(", ") %></p>
+
+<%= link_to "Editar", edit_company_path(@company), class: "btn btn-warning" %>
+<%= link_to "Voltar", companies_path, class: "btn btn-secondary" %>

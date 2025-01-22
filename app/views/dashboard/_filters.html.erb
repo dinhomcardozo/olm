@@ -1,0 +1,67 @@
+<div class="filters">
+  <h3>Filtrar Opportunities</h3>
+
+  <%= form_with url: opportunities_path, method: :get, remote: true, local: false do |f| %>
+
+    <!-- Por Produto -->
+    <div class="filter-group">
+      <h4>Por Produto</h4>
+      <div class="accordion">
+        <div>
+          <%= f.label :product_type, "Tipo de Produto" %>
+          <%= f.select :product_type, ClientProduct.distinct.pluck(:product_type), { prompt: "Selecione um tipo" }, class: "form-control" %>
+        </div>
+        <div>
+          <%= f.label :product_description, "Nome do Produto" %>
+          <%= f.text_field :product_description, placeholder: "Digite o nome do produto", class: "form-control" %>
+        </div>
+        <div>
+          <%= f.label :product_brand, "Marca do Produto" %>
+          <%= f.select :product_brand, ClientProduct.distinct.pluck(:product_brand), { prompt: "Selecione uma marca" }, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Por Estágio -->
+    <div class="filter-group">
+      <h4>Por Estágio</h4>
+      <%= f.label :stage_ids, "Estágio" %>
+      <%= f.collection_select :stage_ids, Stage.all, :id, :stage_name, { prompt: "Selecione estágios", multiple: true }, class: "form-control" %>
+    </div>
+
+    <!-- Por Empresa -->
+    <div class="filter-group">
+      <h4>Por Empresa</h4>
+      <div>
+        <%= f.label :company_name, "Nome da Empresa" %>
+        <%= f.text_field :company_name, placeholder: "Digite o nome da empresa", class: "form-control" %>
+      </div>
+      <div>
+        <%= f.label :company_cnpj, "CNPJ da Empresa" %>
+        <%= f.text_field :company_cnpj, placeholder: "Digite o CNPJ", class: "form-control" %>
+      </div>
+    </div>
+
+    <!-- Por Contato -->
+    <div class="filter-group">
+      <h4>Por Contato</h4>
+      <div>
+        <%= f.label :contact_id, "ID do Contato" %>
+        <%= f.number_field :contact_id, placeholder: "Digite o ID do contato", class: "form-control" %>
+      </div>
+      <div>
+        <%= f.label :contact_email, "E-mail do Contato" %>
+        <%= f.text_field :contact_email, placeholder: "Digite o e-mail do contato", class: "form-control" %>
+      </div>
+      <div>
+        <%= f.label :contact_name, "Nome do Contato" %>
+        <%= f.text_field :contact_name, placeholder: "Digite o nome do contato", class: "form-control" %>
+      </div>
+    </div>
+
+    <!-- Botões de Ação -->
+    <div class="form-group">
+    <%= f.submit "Aplicar", class: "btn btn-primary" %>
+    <%= link_to "Limpar Filtros", opportunities_path, class: "btn btn-secondary", data: { turbo_method: :get } %>
+  </div>
+<% end %>

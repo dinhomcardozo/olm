@@ -1,0 +1,86 @@
+<%= form_with model: @company, local: true do |f| %>
+    <% if @company.errors.any? %>
+      <div class="alert alert-danger">
+        <ul>
+          <% @company.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="form-group">
+      <%= f.label :company_name, "Razão Social" %>
+      <%= f.text_field :company_name, class: "form-control", placeholder: "Digite a razão social da empresa" %>
+    </div>
+  
+    <div class="form-group">
+      <%= f.label :company_cnpj, "CNPJ" %>
+      <%= f.text_field :company_cnpj, class: "form-control", placeholder: "Digite o CNPJ" %>
+    </div>
+  
+    <div class="form-group">
+      <%= f.label :email, "E-mail Administrativo" %>
+      <%= f.email_field :email, class: "form-control", placeholder: "Digite o e-mail administrativo" %>
+    </div>
+  
+    <div class="form-group">
+      <%= f.label :phone, "Telefone" %>
+      <%= f.telephone_field :phone, class: "form-control", placeholder: "Digite o telefone da empresa" %>
+    </div>
+  
+    <div class="form-group">
+      <%= f.label :country, "País" %>
+      <%= f.text_field :country, class: "form-control", placeholder: "Digite o país", id: "country" %>
+    </div>
+  
+    <% if @company.country == "Brasil" %>
+      <div class="form-group">
+        <%= f.label :zipcode, "CEP" %>
+        <%= f.text_field :zipcode, class: "form-control", placeholder: "Digite o CEP", id: "zipcode" %>
+      </div>
+  
+      <div class="form-group">
+        <%= f.label :address, "Endereço" %>
+        <%= f.text_field :address, class: "form-control", placeholder: "Digite o endereço" %>
+      </div>
+  
+      <div class="form-group">
+        <%= f.label :neighborhood, "Bairro" %>
+        <%= f.text_field :neighborhood, class: "form-control", placeholder: "Digite o bairro" %>
+      </div>
+  
+      <div class="form-group">
+        <%= f.label :city, "Cidade" %>
+        <%= f.text_field :city, class: "form-control", placeholder: "Digite a cidade" %>
+      </div>
+  
+      <div class="form-group">
+        <%= f.label :state, "Estado" %>
+        <%= f.text_field :state, class: "form-control", placeholder: "Digite o estado" %>
+      </div>
+    <% end %>
+  
+    <div class="form-group">
+      <%= f.label :group_id, "Grupo" %>
+      <%= f.collection_select :group_id, Group.all, :id, :name, prompt: "Selecione um grupo", class: "form-control" %>
+    </div>
+  
+    <div class="form-group">
+      <%= f.label :segment_id, "Segmento" %>
+      <%= f.collection_select :segment_id, Segment.all, :id, :name, prompt: "Selecione um segmento", class: "form-control" %>
+    </div>
+  
+    <div class="form-group">
+      <%= f.label :sub_segment_id, "Subsegmento" %>
+      <%= f.collection_select :sub_segment_id, SubSegment.all, :id, :name, prompt: "Selecione um subsegmento", class: "form-control" %>
+    </div>
+  
+    <div class="form-group">
+      <%= f.label :client_id, "Cliente" %>
+      <%= f.collection_select :client_id, Client.all, :id, :name, prompt: "Selecione um cliente", class: "form-control" %>
+    </div>
+  
+    <%= f.submit @company.new_record? ? "Criar Empresa" : "Atualizar Empresa", class: "btn btn-primary" %>
+    <%= link_to "Descartar", companies_path, class: "btn btn-secondary" %>
+  <% end %>  

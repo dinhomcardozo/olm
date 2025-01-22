@@ -1,0 +1,6 @@
+<div class="stage">
+  <h2><%= stage_name %></h2>
+  <% opportunities.each do |opportunity| %>
+    <%= render partial: "opportunity", locals: { opportunity: opportunity } %>
+  <% end %>
+</div>

@@ -1,0 +1,4 @@
+// Renderiza o conteúdo da partial no lightbox
+$("#lightbox-container").html("<%= j render 'opportunity_lightbox', opportunity: @opportunity %>");
+// Exibe o lightbox
+$("#lightbox-container").addClass("active");

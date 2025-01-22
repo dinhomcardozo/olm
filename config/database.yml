@@ -1,0 +1,19 @@
+#---------- Postgres ----------#
+
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: ellipsis_olm
+  pool: 5
+  username: postgres
+  password: h4rdc0r3
+  host: localhost
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: ellipsis_test
+  pool: 5
+  username: postgres
+  password: h4rdc0r3
+  host: localhost

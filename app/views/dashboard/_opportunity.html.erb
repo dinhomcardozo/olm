@@ -1,0 +1,24 @@
+<div id="opportunities-list">
+  <% @opportunities.each do |opportunity| %>
+    <div class="opportunity">
+      <!-- Exibe o ID da oportunidade -->
+      <p><strong>Oportunidade:</strong> <%= opportunity.opp_id %></p>
+      
+      <!-- Nome da empresa associada -->
+      <p><strong>Empresa:</strong> <%= opportunity.company.company_name %></p>
+      
+      <!-- Nome do contato associado -->
+      <p><strong>Contato:</strong> <%= opportunity.contact.full_name %></p>
+      
+      <!-- Soma do valor total de todos os produtos associados -->
+      <p><strong>Valor Total:</strong> R$ <%= opportunity.opportunity_products.sum { |op| op.client_product.product_price } %></p>
+      
+      <!-- Link para abrir mais detalhes da oportunidade -->
+      <p>
+        <%= link_to "Ver +", opportunity_path(opportunity, format: :html), 
+          class: "view-more-link", 
+          data: { turbo_frame: "opportunity-lightbox" } %>
+      </p>
+    </div>
+  <% end %>
+</div>

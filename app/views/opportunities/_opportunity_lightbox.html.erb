@@ -1,0 +1,110 @@
+<div id="opportunity-details">
+  <% if @opportunity.present? && @opportunity.new_record? %>
+    <h3>Criar Nova Oportunidade</h3>
+  <% else %>
+    <h3>Detalhes da Oportunidade <%= @opportunity.opp_id %></h3>
+  <% end %>
+
+  <%= form_with model: @opportunity, local: true, id: "opportunity-form" do |f| %>
+    <% if @opportunity.errors.any? %>
+      <div class="alert alert-danger">
+        <ul>
+          <% @opportunity.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <!-- Container flexível para as colunas -->
+    <div class="row-container">
+      <!-- Coluna Principal (esquerda) -->
+      <div class="row">
+        <div class="col-md-8">
+          <!-- Informações do Contato -->
+          <div class="form-group">
+            <%= f.label :contact_id, "Contato" %>
+            <%= f.text_field :contact_id, placeholder: "Digite o nome ou e-mail do contato", class: "form-control", id: "contact-id" %>
+          </div>
+
+          <!-- Informações da Empresa -->
+          <div class="form-group">
+            <%= f.label :company_name, "Empresa" %>
+            <%= f.text_field :company_name, class: "form-control", readonly: true, id: "company-name" %>
+          </div>
+
+          <!-- Informações do Grupo -->
+          <div class="form-group">
+            <%= f.label :group_name, "Grupo" %>
+            <%= f.text_field :group_name, class: "form-control", readonly: true, id: "group-name" %>
+          </div>
+
+          <!-- Segmentos -->
+          <div class="form-group">
+            <%= f.label :segments, "Segmentos" %>
+            <%= f.text_area :segments, class: "form-control", readonly: true, id: "segments" %>
+          </div>
+
+          <!-- E-mail e Telefone -->
+          <div class="form-group">
+            <%= f.label :email, "E-mail" %>
+            <%= f.email_field :email, class: "form-control", readonly: true, id: "email" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :telephone, "Telefone" %>
+            <%= f.telephone_field :telephone, class: "form-control", readonly: true, id: "telephone" %>
+          </div>
+
+          <!-- Anotações -->
+          <div class="form-group">
+            <%= f.label :notes, "Anotações" %>
+            <%= f.text_area :notes, class: "form-control", rows: 4 %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna Lateral (direita) -->
+      <div class="row2">
+        <div class="col-md-4">
+          <h4>Adicionar Produtos</h4>
+          <div id="product-list">
+            <% 15.times do |i| %>
+              <div class="product-row form-row mb-2" data-index="<%= i %>">
+                <div class="col-6">
+                  <%= select_tag "opportunity[products_attributes][#{i}][product_id]",
+                    options_from_collection_for_select(@client_products, :product_id, :product_description),
+                    prompt: "Selecione um produto",
+                    class: "form-control product-select" %>
+                </div>
+                <div class="col-2">
+                  <%= number_field_tag "opportunity[products_attributes][#{i}][quantity]",
+                    nil,
+                    class: "form-control product-quantity",
+                    placeholder: "Qtd",
+                    min: 1 %>
+                </div>
+                <div class="col-2">
+                  <%= text_field_tag "opportunity[products_attributes][#{i}][unit_price]",
+                    nil,
+                    class: "form-control product-unit-price",
+                    readonly: true,
+                    placeholder: "Total R$" %>
+                </div>
+                <div class="col-2">
+                  <%= text_field_tag "opportunity[products_attributes][#{i}][total_price]",
+                    nil,
+                    class: "form-control product-total-price",
+                    readonly: true,
+                    placeholder: "R$" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= f.submit @opportunity.new_record? ? "Criar Oportunidade" : "Salvar Alterações", class: "btn btn-primary mt-3" %>
+  <% end %>
+</div>
