@@ -1,21 +1,16 @@
-#---------- Postgres ----------#
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: postgres
+  password: h4rdc0r3
+  host: localhost   # Alterado de "db" para "localhost"
+  port: 5432
 
 development:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: ellipsis_olm
-  pool: 5
-  username: postgres
-  password: h4rdc0r3
-  host: db  # Alterado de localhost para o nome do serviço no Docker
-  port: 5432  # Adicionado o número da porta padrão do PostgreSQL
 
 test:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: ellipsis_test
-  pool: 5
-  username: postgres
-  password: h4rdc0r3
-  host: db  # Alterado de localhost para o nome do serviço no Docker
-  port: 5432  # Adicionado o número da porta padrão do PostgreSQL
