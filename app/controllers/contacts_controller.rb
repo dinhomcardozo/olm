@@ -1,5 +1,22 @@
 class ContactsController < ApplicationController
   def index
+    @contacts = Contact.all # Inicialize @contacts com todos os registros  
+
+      # Busca por full_name
+    if params[:search].present?
+      @contacts = @contacts.where("CONCAT(first_name, ' ', last_name) ILIKE ?", "%#{params[:search]}%")
+    end
+
+    # Ordenação por full_name
+    if params[:order_by] == "full_name"
+      @contacts = @contacts.order("CONCAT(first_name, ' ', last_name) #{params[:direction] || 'ASC'}")
+    else
+      @contacts = @contacts.order("created_at DESC") # Ordenação padrão
+    end
+
+    # Paginação
+    @contacts = @contacts.page(params[:page]).per(10)
+
   end
 
   def search
@@ -24,6 +41,10 @@ class ContactsController < ApplicationController
       render json: []
     end
   end 
+
+  def new
+    @contact = Contact.new
+  end
 
   def show
   end

@@ -1,0 +1,42 @@
+### _form_contacts.html.erb ###
+<%= form_with model: @contact, local: true, class: "contact-form" do |f| %>
+    <% if @contact.errors.any? %>
+      <div class="alert alert-danger">
+        <ul>
+          <% @contact.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="form-group">
+      <%= f.label :first_name, "Primeiro nome" %>
+      <%= f.text_field :first_name, class: "form-control", placeholder: "Digite o primeiro nome" %>
+    </div>
+  
+    <div class="form-group">
+      <%= f.label :last_name, "Último nome" %>
+      <%= f.text_field :last_name, class: "form-control", placeholder: "Digite o último nome" %>
+    </div>
+  
+    <div class="form-group">
+      <%= f.label :email, "E-mail" %>
+      <%= f.email_field :email, class: "form-control", placeholder: "Digite o e-mail" %>
+    </div>
+  
+    <div class="form-group">
+      <%= f.label :phone, "Telefone" %>
+      <%= f.telephone_field :phone, class: "form-control", placeholder: "Digite o telefone" %>
+    </div>
+  
+    <div class="form-group">
+      <%= f.label :company_id, "Empresa relacionada" %>
+      <%= f.collection_select :company_id, Company.all, :id, :company_name, { prompt: "Selecione uma empresa" }, class: "form-control" %>
+    </div>
+  
+    <div class="form-actions">
+      <%= f.submit "Salvar", class: "btn btn-primary" %>
+      <%= link_to "Descartar", dashboard_path, class: "btn btn-secondary" %>
+    </div>
+  <% end %>

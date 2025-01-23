@@ -37,8 +37,8 @@ Rails.application.routes.draw do
 
   # Cadastro geral de Companies, Groups e Contacts
   resources :companies, only: [:index, :edit, :create, :update, :destroy]
-  resources :groups, only: [:index, :create, :update, :destroy]
-  resources :contacts, only: [:index, :create, :update, :destroy]
+  resources :groups, only: [:index, :create, :update, :destroy, :edit]
+  resources :contacts, only: [:index, :create, :update, :destroy, :edit]
 
   # Oportunidades (com suporte para lightbox)
   resources :opportunities, path: 'oportunidade', only: [:index, :show, :update, :new, :create, :edit]

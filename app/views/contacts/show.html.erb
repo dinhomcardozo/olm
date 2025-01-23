@@ -1,2 +1,9 @@
-<h1>Contacts#show</h1>
-<p>Find me in app/views/contacts/show.html.erb</p>
+### show.html.erb ###
+<h1>Detalhes do Contato</h1>
+    <p><strong>Primeiro Nome:</strong> <%= @contact.first_name %></p>
+    <p><strong>Último Nome:</strong> <%= @contact.last_name %></p>
+    <p><strong>E-mail:</strong> <%= @contact.email %></p>
+    <p><strong>Telefone:</strong> <%= @contact.phone %></p>
+    <p><strong>Empresa Relacionada:</strong> <%= @contact.company.company_name %></p>
+    <%= link_to "Editar", edit_contact_path(@contact), class: "btn btn-primary" %>
+    <%= link_to "Excluir", contact_path(@contact), method: :delete, data: { confirm: "Você tem certeza que deseja excluir este contato?" }, class: "btn btn-danger" %>

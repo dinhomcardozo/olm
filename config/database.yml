@@ -7,7 +7,8 @@ development:
   pool: 5
   username: postgres
   password: h4rdc0r3
-  host: localhost
+  host: db  # Alterado de localhost para o nome do serviço no Docker
+  port: 5432  # Adicionado o número da porta padrão do PostgreSQL
 
 test:
   adapter: postgresql
@@ -16,4 +17,5 @@ test:
   pool: 5
   username: postgres
   password: h4rdc0r3
-  host: localhost
+  host: db  # Alterado de localhost para o nome do serviço no Docker
+  port: 5432  # Adicionado o número da porta padrão do PostgreSQL

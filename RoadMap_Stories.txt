@@ -1,0 +1,84 @@
+Criar a página de cadastro para criar, atualizar, visualizar e excluir empresas. Pode ser um form partial que será replicado nessas views new.html.erb, edit.html.erb, destroy.html.erb, show.html.erb...
+
+(Dados devem ser salvos na tabela companies relacionando ao client_id que está criando a tabela)
+Por hora, vou ignorar qualquer autenticação de usuários. Apenas criarei a página.
+
+
+CNPJ: 
+Razão Social: 
+E-mail administrativo: 
+Telefone: 
+País: 
+(Se for Brasil, aparece: ) CEP:  (Ao preencher o CEP, preenche automaticamente Endereço, Bairro, Cidade e Estado)
+Endereço: 
+Número: 
+Bairro: 
+Cidade: 
+Estado: 
+
+Grupo: (Seleciona Grupo, se houver)
+Segmento: 
+Subsegmento: 
+Contatos relacionados: (Múltiplas seleções de contatos que pertencem a esta empresa)
+Oportunidades atuais: 
+Contratos atuais: 
+
+Botão de SALVAR, DESCARTAR (Retorna ao Dashboard)
+
+Index deve aparecer todas as empresas cadastradas em uma tabela com paginação.
+
+Colunas desta tabela:
+company_name, company_cnpj, segment_id, sub_segment_id, group_id, created_by, updated_by
+
+Quero um campo de busca por company_cnpj, company_name e filtros por ordem crescente e decrescente de todas as colunas.
+
+--------------------------------------------------------
+
+Criar páginas para criar, atualizar, visualizar e excluir empresas contatos:
+(Dados devem ser salvos na tabela contacts relacionando à company_id a qual o contact pertence, e ao client_id que está criando a tabela)
+Por hora, vou ignorar qualquer autenticação de usuários. Apenas criarei as páginas.
+
+Primeiro nome: 
+Último nome: 
+E-mail: 
+Telefone: 
+
+Empresa relacionada: (Seleciona empresa a qual o contato pertence)
+
+Botão de SALVAR, DESCARTAR (Retorna ao Dashboard)
+
+Crie um form em partial _form_contacts.html.erb que será renderizado nas views new, edit, show
+
+Botão de SALVAR
+
+--------------------------------------------------------
+
+Criar página de cadastro para criar, editar, excluir e visualizar Grupos e suas empresas relacionadas
+
+Todos os grupos:
+(Exibe lista de todos os grupos - ao lado de cada nome há opção de 'Editar')
+
+Ao clicar sobre o grupo, exibe ao lado todas as empresas (CNPJs) dentro daquele grupo.
+AO lado de cada empresa, ter um 'X' de excluir,
+
+
+
+--------------------------------------------------------
+
+Módulo Negócios
+
+Orçamento
+
+habilitar o botão apenas no stage "quote"
+
+Para fazer um Contrato é necessário que haja:
+
+Um orçamento que gera um pedido e um pedido que pode, opcionalmente, gerar um contrato.
+
+O que contém em um orçamento?
+
+Dados de um contato da empresa (o que está na Opportunity) (Nome completo, telefone, email)
+Dados da empresa (CNPJ, Endereço, Razão Social, email principal e telefone)
+Produtos cadastrados na opportunity
+
+Condições de pagamento: (Criar módulo de cadastro de 'payment_options')

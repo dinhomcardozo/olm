@@ -1,0 +1,22 @@
+Github
+
+Terminal Gitbash apenas aberto:
+
+git init
+
+git status
+
+git add .
+
+git status
+
+
+--- 
+
+git commit -m "primeiro commit"
+
+git branch -M main (só depois do commit)
+
+git remote add origin https://github.com/dinhomcardozo/ellipsis_olm.git (pode retornar que já existe...)
+
+git push -u origin main
